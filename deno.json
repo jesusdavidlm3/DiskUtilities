@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "backup": "deno run --allow-read main.ts"
+    "backup": "deno run --allow-read main.ts",
+    "compile": "deno compile --no-check --allow-read main.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
