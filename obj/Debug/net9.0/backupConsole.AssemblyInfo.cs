@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("backupConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07e342d573c7c4413a81735549fccf7f20ec74bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("backupConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backupConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
