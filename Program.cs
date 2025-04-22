@@ -10,6 +10,13 @@ char destiny;               //Destino seleccionado
 int listNumber = 1;         //Contador para listas
 bool soFound = false;       //Variable que dice si existe un SO en el disco origen
 
+string[] includedDirectories = {    //Carpetas que se copiaran desde todos los usuarios
+    "Documents",
+    "Desktop",
+    "Downloads"
+};
+List<string> excludedFiles = [];
+
 void getDrives(){
     drives = [];
     foreach(char item in abc)   //Detectamos que unidades existen y las guardamos en la lista de unidades detectadas.
@@ -17,6 +24,33 @@ void getDrives(){
         if(Directory.Exists($"{item}:\\"))
         {
             drives.Add(item);
+        }
+    }
+}
+
+void copyFiles(string directory){
+    foreach(string file in Directory.GetFiles(directory))
+    {
+        string extension = Path.GetExtension(file);
+        if(!excludedFiles.Contains(extension))
+        {
+            //Aqui va la linea que copiara el archivo
+            Console.WriteLine($"Se copio: {file}");
+        }
+        else
+        {
+            Console.WriteLine($"No se copio: {file}");
+        }
+    }
+}
+
+void copyFolders(string directory){
+    Console.WriteLine($"Se encontro la carpeta: {directory}");
+    copyFiles(directory);
+    string[] folders = Directory.GetDirectories(directory);
+    if(folders.Length > 0){
+        foreach(string folder in folders){
+            copyFolders(folder);
         }
     }
 }
@@ -96,14 +130,6 @@ do{             //Este bloque se ejecuta mientras el origen y el destino sean el
 
 Console.WriteLine($"Ah seleccionado el disco {origin} como origen y {destiny} como destino");
 
-Console.WriteLine("De un nombre al respaldo");
-string backupName = Console.ReadLine();
-
-Console.WriteLine("Escriba las extensiones de archivo que desea excluir separados por espacios");
-string[] excludedFiles = Console.ReadLine().Split(' ');
-
-List<string> users = new List<string>(Directory.GetDirectories($"{origin}:\\Users"));   //Obtenemos las capetas de usuario
-
 string[] excludedDirectories = {    //carpetas predeterminadas de windows que no se respaldaran
     $"{origin}:\\Users\\All Users",
     $"{origin}:\\Users\\Default",
@@ -111,34 +137,23 @@ string[] excludedDirectories = {    //carpetas predeterminadas de windows que no
     $"{origin}:\\Users\\Default User"
 };
 
+Console.WriteLine("De un nombre al respaldo");
+string backupName = Console.ReadLine();
+
+Console.WriteLine("Escriba las extensiones de archivo que desea excluir separados por espacios");
+excludedFiles = new List<string>(Console.ReadLine().Split(' '));
+
+List<string> users = new List<string>(Directory.GetDirectories($"{origin}:\\Users"));   //Obtenemos las capetas de usuario
+
 users = users.Where(i => !excludedDirectories.Contains(i)).ToList();
 
-string[] includedDirectories = {    //Carpetas que se copiaran desde todos los usuarios
-    "Documents",
-    "Desktop",
-    "Downloads"
-};
-
 string destinyDirectory = $"{destiny}:\\Respaldo de {backupName}";  //Carpeta que guaradara el respaldo
-Directory.CreateDirectory(destinyDirectory);     //Creamos el direcotio destino del respaldo
-
+Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino del respaldo
 
 foreach(string user in users)
 {
     foreach(string directory in includedDirectories)
     {
-        foreach(string file in Directory.GetFiles($"{user}\\{directory}"))
-        {
-            string extension = Path.GetExtension(file);
-            if(excludedFiles.Contains(extension))
-            {
-                Console.WriteLine($"Se copio: {file}");
-            }
-            else
-            {
-                //Aqui va la linea que copiara el archivo
-                Console.WriteLine($"No se copio: {file}");
-            }
-        }
+        copyFolders($"{user}\\{directory}");
     }
 }
