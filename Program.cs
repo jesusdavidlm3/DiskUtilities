@@ -32,15 +32,18 @@ void getDrives(){
 void copyFiles(string oDirectory, string dDirectory){
     foreach(string file in Directory.GetFiles(oDirectory))
     {
-        // string extension = Path.GetExtension(file);
-        // if(!excludedFiles.Contains(extension))
-        // {
-        //     Console.WriteLine($"Se copio: {file}");
-        // }
-        // else
-        // {
-        //     Console.WriteLine($"No se copio: {file}");
-        // }
+        string fileName = Path.GetFileName(file);
+        // Console.WriteLine($"{dDirectory}\\{fileName}");
+        string extension = Path.GetExtension(file);
+        if(!excludedFiles.Contains(extension))
+        {
+            File.Copy(file, $"{dDirectory}\\{fileName}", true);
+            Console.WriteLine($"Se copio: {file}");
+        }
+        else
+        {
+            Console.WriteLine($"No se copio: {file}");
+        }
     }
 }
 
@@ -49,7 +52,7 @@ void copyFolders(string oDirectory, string dDirectory){
     Console.WriteLine($"{dDirectory}\\{folderName}");
     Directory.CreateDirectory($"{dDirectory}\\{folderName}");
     Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
-    // copyFiles(oDirectory, dDirectory);
+    copyFiles(oDirectory, $"{dDirectory}\\{folderName}");
     string[] folders = Directory.GetDirectories(oDirectory);
     if(folders.Length > 0){
         foreach(string folder in folders){
