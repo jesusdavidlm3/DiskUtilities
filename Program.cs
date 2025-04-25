@@ -12,11 +12,11 @@ bool soFound = false;       //Variable que dice si existe un SO en el disco orig
 string backupName;          //Nombre de la carpeta destino del respaldo
 
 string[] includedDirectories = {    //Carpetas que se copiaran desde todos los usuarios
-    // "Documents",
+    "Documents",
     "Desktop",
     "Downloads"
 };
-List<string> excludedFiles = [];
+List<string> excludedFiles = [".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll"];
 
 void getDrives(){
     drives = [];
@@ -33,10 +33,10 @@ void copyFiles(string oDirectory, string dDirectory){
     foreach(string file in Directory.GetFiles(oDirectory))
     {
         string fileName = Path.GetFileName(file);
-        // Console.WriteLine($"{dDirectory}\\{fileName}");
         string extension = Path.GetExtension(file);
         if(!excludedFiles.Contains(extension))
         {
+            Console.WriteLine($"Se esta copiando {file}");
             File.Copy(file, $"{dDirectory}\\{fileName}", true);
             Console.WriteLine($"Se copio: {file}");
         }
@@ -49,15 +49,18 @@ void copyFiles(string oDirectory, string dDirectory){
 
 void copyFolders(string oDirectory, string dDirectory){
     string folderName = Path.GetFileName(oDirectory);
-    Console.WriteLine($"{dDirectory}\\{folderName}");
-    Directory.CreateDirectory($"{dDirectory}\\{folderName}");
-    Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
-    copyFiles(oDirectory, $"{dDirectory}\\{folderName}");
-    string[] folders = Directory.GetDirectories(oDirectory);
-    if(folders.Length > 0){
-        foreach(string folder in folders){
-            copyFolders(folder, $"{dDirectory}\\{folderName}");
+    try{
+        Directory.CreateDirectory($"{dDirectory}\\{folderName}");
+        Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
+        copyFiles(oDirectory, $"{dDirectory}\\{folderName}");
+        string[] folders = Directory.GetDirectories(oDirectory);
+        if(folders.Length > 0){
+            foreach(string folder in folders){
+                copyFolders(folder, $"{dDirectory}\\{folderName}");
+            }
         }
+    }catch(Exception ex){
+        Console.WriteLine("Error al copiar un archivo");
     }
 }
 
@@ -147,7 +150,11 @@ Console.WriteLine("De un nombre al respaldo");
 backupName = Console.ReadLine();
 
 Console.WriteLine("Escriba las extensiones de archivo que desea excluir separados por espacios");
-excludedFiles = new List<string>(Console.ReadLine().Split(' '));
+Console.WriteLine("Por defecto se excluyen: .exe, .mp3, .mp4, .ini, .ink, .tmp, .lnk, .log, .bak, .old, .dll");
+List<string> rawExcludedFiles = new List<string>(Console.ReadLine().Split(' '));
+foreach(string ext in rawExcludedFiles){
+    excludedFiles.Add(ext);
+}
 
 List<string> users = new List<string>(Directory.GetDirectories($"{origin}:\\Users"));   //Obtenemos las capetas de usuario
 
