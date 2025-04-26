@@ -16,7 +16,12 @@ string[] includedDirectories = {    //Carpetas que se copiaran desde todos los u
     "Desktop",
     "Downloads"
 };
-List<string> excludedFiles = [".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll"];
+List<string> excludedFiles = 
+[
+    ".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll", ".win", ".iso",
+    ".img", ".asp", ".msp", ".cfg", ".cat", ".bin", ".mkv", ".efi", ".p7b", ".inf", ".msi", ".bmp", ".mui",
+    ".dat", ".man"
+];
 
 void getDrives(){
     drives = [];
@@ -150,7 +155,7 @@ Console.WriteLine("De un nombre al respaldo");
 backupName = Console.ReadLine();
 
 Console.WriteLine("Escriba las extensiones de archivo que desea excluir separados por espacios");
-Console.WriteLine("Por defecto se excluyen: .exe, .mp3, .mp4, .ini, .ink, .tmp, .lnk, .log, .bak, .old, .dll");
+Console.WriteLine("Por defecto se excluyen: .exe, .mp3, .mp4, .ini, .ink, .tmp, .lnk, .log, .bak, .old, .dll, .win, .ISO, .img, .asp, .MSP, .cfg, .cat, .bin, .mkv, .EFI, .p7b, .inf, .MSI, .BMP, .mui, .dat, .man");
 List<string> rawExcludedFiles = new List<string>(Console.ReadLine().Split(' '));
 foreach(string ext in rawExcludedFiles){
     excludedFiles.Add(ext);
@@ -165,8 +170,14 @@ Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino
 
 foreach(string user in users)
 {
+    string userFolderName = Path.GetFileName(user);
+    string destinyUserFolder = $"{destiny}:\\{backupName}\\{userFolderName}";
+    Directory.CreateDirectory(destinyUserFolder);
     foreach(string directory in includedDirectories)
     {
-        copyFolders($"{user}\\{directory}", $"{destiny}:\\{backupName}");
+        copyFolders($"{user}\\{directory}", destinyUserFolder);
     }
 }
+
+Console.WriteLine("Ejecucion finalizada, presione una tecla para Cerra");
+Console.ReadLine();
