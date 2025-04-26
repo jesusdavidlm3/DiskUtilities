@@ -10,6 +10,7 @@ char destiny;               //Destino seleccionado
 int listNumber = 1;         //Contador para listas
 bool soFound = false;       //Variable que dice si existe un SO en el disco origen
 string backupName;          //Nombre de la carpeta destino del respaldo
+List<string> errorList = [];
 
 string[] includedDirectories = {    //Carpetas que se copiaran desde todos los usuarios
     "Documents",
@@ -66,6 +67,7 @@ void copyFolders(string oDirectory, string dDirectory){
         }
     }catch(Exception ex){
         Console.WriteLine("Error al copiar un archivo");
+        errorList.Add(ex.Message);
     }
 }
 
@@ -179,5 +181,15 @@ foreach(string user in users)
     }
 }
 
-Console.WriteLine("Ejecucion finalizada, presione una tecla para Cerra");
+if(errorList.Count != 0 )
+{
+    Console.WriteLine("Se enconraron los siguientes errores:");
+    foreach(string err in errorList)
+    {
+        Console.WriteLine(err);
+    }
+    Console.WriteLine("Si desconoce la ubicacion de estas carpetas ignorelas. es posible que sean enlaces simbolicos a otras bibliotecas");
+}
+
+Console.WriteLine("Ejecucion finalizada, presione una tecla para Cerrar");
 Console.ReadLine();
