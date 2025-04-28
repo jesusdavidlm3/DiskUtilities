@@ -15,7 +15,10 @@ List<string> errorList = [];
 string[] includedDirectories = {    //Carpetas que se copiaran desde todos los usuarios
     "Documents",
     "Desktop",
-    "Downloads"
+    "Downloads",
+    "Music",
+    "Videos",
+    "Pictures"
 };
 List<string> excludedFiles = 
 [
