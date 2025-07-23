@@ -23,7 +23,7 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
     
-    private void Refresh(object sender, EventArgs e)
+    private void HandleChange(object sender, EventArgs e)
     {
         var drives = (AvailableDrives)Resources["DrivesList"];
 
@@ -40,6 +40,34 @@ public partial class MainWindow : Window
         if (selectedDestiny != null && drives.Contains((char)selectedDestiny))
         {
             Destiny.SelectedItem = selectedDestiny;
+        }
+
+        if (Destiny.SelectedItem != null && (Origin.SelectedItem == Destiny.SelectedItem))
+        {
+            SameDiskErr.Visibility = Visibility.Visible;
+        }
+    }
+
+    private void VerifySelection(object sender, EventArgs e)
+    {
+        if (Origin.SelectedItem != null && Destiny.SelectedItem != null &&
+            Origin.SelectedItem.Equals(Destiny.SelectedItem))
+        {
+            NoSoErr.Visibility = Visibility.Collapsed;
+            SameDiskErr.Visibility = Visibility.Visible;
+            StartButton.IsEnabled = false;
+        }
+        else if (Origin.SelectedItem != null && !Directory.Exists($"{Origin.SelectedItem}:\\Users"))
+        {
+            SameDiskErr.Visibility = Visibility.Collapsed;
+            NoSoErr.Visibility = Visibility.Visible;
+            StartButton.IsEnabled = false;
+        }
+        else
+        {
+            SameDiskErr.Visibility = Visibility.Collapsed;
+            NoSoErr.Visibility = Visibility.Collapsed;
+            StartButton.IsEnabled = true;
         }
     }
 }

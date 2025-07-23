@@ -24,14 +24,22 @@
                 Margin="0 0 15 0"
                 Name="Origin"
                 ItemsSource="{StaticResource DrivesList}"
-                DropDownOpened="Refresh"/>
+                DropDownOpened="HandleChange"
+                DropDownClosed="VerifySelection"/>
             <Label>Disco de Destino: </Label>
             <ComboBox 
                 Margin="0 0 15 0"
                 Name="Destiny"
                 ItemsSource="{StaticResource DrivesList}"
-                DropDownOpened="Refresh"/>
+                DropDownOpened="HandleChange"
+                DropDownClosed="VerifySelection"/>
         </StackPanel>
-        <Button Width="50" Margin="20">Copiar</Button>
+        <TextBlock Visibility="Collapsed" Name="NoSoErr">El disco detino no contiene un sistema operativo Windows</TextBlock>
+        <TextBlock Visibility="Collapsed" Name="SameDiskErr">El disco de origen no puede ser el mismo que de destino</TextBlock>
+        <Button
+            Width="50"
+            Margin="20"
+            Name="StartButton"
+            IsEnabled="False">Copiar</Button>
     </StackPanel>
 </Window>
