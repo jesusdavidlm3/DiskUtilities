@@ -66,6 +66,10 @@ public partial class MainWindow : Window
             NoSoErr.Visibility = Visibility.Visible;
             StartButton.IsEnabled = false;
         }
+        else if (Origin.SelectedItem == null || Destiny.SelectedItem == null)
+        {
+            StartButton.IsEnabled = false;
+        }
         else
         {
             SameDiskErr.Visibility = Visibility.Collapsed;
@@ -74,16 +78,23 @@ public partial class MainWindow : Window
         }
     }
 
-    private void StartBackup(object sender, EventArgs e)
+    private async void StartBackup(object sender, EventArgs e)
     {
+        Success.Visibility = Visibility.Collapsed;
         StartButton.IsEnabled = false;
         ProgressIndicator.Visibility = Visibility.Visible;
+        Origin.IsEnabled =  false;
+        Destiny.IsEnabled = false;
         var selectedOrigin = $"{Origin.SelectedItem}";
         var selectedDestiny = $"{Destiny.SelectedItem}";
         
-        logic.startBackup(selectedOrigin, selectedDestiny);
+        await Task.Run((() => logic.startBackup(selectedOrigin, selectedDestiny)));
+        
         StartButton.IsEnabled = true;
         ProgressIndicator.Visibility = Visibility.Collapsed;
+        Origin.IsEnabled = true;
+        Destiny.IsEnabled = true;
+        Success.Visibility = Visibility.Visible;
     }
 
 }

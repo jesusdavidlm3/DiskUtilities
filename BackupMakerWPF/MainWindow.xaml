@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BackupMakerWPF"
         mc:Ignorable="d"
-        Title="Backup Maker" Height="450" Width="800">
+        Title="Backup Maker" Height="500" Width="800"
+        ResizeMode="CanMinimize">
     
     <Window.Resources>
         <local:AvailableDrives x:Key="DrivesList"/>        
@@ -34,20 +35,40 @@
                 DropDownOpened="HandleChange"
                 DropDownClosed="VerifySelection"/>
         </StackPanel>
-        <TextBlock Visibility="Collapsed" Name="NoSoErr">El disco de origen no contiene un sistema operativo Windows</TextBlock>
-        <TextBlock Visibility="Collapsed" Name="SameDiskErr">El disco de origen no puede ser el mismo que de destino</TextBlock>
+        <TextBlock
+            FontSize="15"
+            HorizontalAlignment="Center"
+            Visibility="Collapsed"
+            Foreground="Red"
+            Name="NoSoErr"
+            Text="El disco de origen no contiene un sistema operativo Windows"/>
+        <TextBlock
+            FontSize="15"
+            HorizontalAlignment="Center"
+            Visibility="Collapsed"
+            Foreground="Red"
+            Name="SameDiskErr"
+            Text="El disco de origen no puede ser el mismo que de destino"/>
         <Button
             Width="50"
             Margin="20"
             Name="StartButton"
             IsEnabled="False"
-            Click="StartBackup">Copiar</Button>
-        <StackPanel Name="ProgressIndicator" Visibility="Hidden">
+            Click="StartBackup"
+            >Copiar</Button>
+        <TextBlock
+            FontSize="15"
+            HorizontalAlignment="Center"
+            Visibility="Collapsed"
+            Foreground="Green"
+            Name="Success"
+            Text="Copia de seguridad completada"/>
+        <StackPanel Name="ProgressIndicator" Visibility="Collapsed">
             <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
             <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
         </StackPanel>
         <ScrollViewer Height="150" Width="500">
-            <TextBlock Name="log"></TextBlock>
+            <TextBlock Name="log" Background="LightGray"></TextBlock>
         </ScrollViewer>
     </StackPanel>
 </Window>
