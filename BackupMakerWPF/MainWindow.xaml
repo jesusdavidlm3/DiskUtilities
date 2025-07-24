@@ -62,13 +62,14 @@
             Visibility="Collapsed"
             Foreground="Green"
             Name="Success"
+            Margin="0 0 0 10"
             Text="Copia de seguridad completada"/>
-        <StackPanel Name="ProgressIndicator" Visibility="Collapsed">
+        <StackPanel Name="ProgressIndicator" Visibility="Collapsed" Margin="0 0 0 10">
             <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
             <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
         </StackPanel>
-        <ScrollViewer Height="150" Width="500">
-            <TextBlock Name="log" Background="LightGray"></TextBlock>
+        <ScrollViewer Height="200" Width="500" Name="LogScroller">
+            <TextBlock Name="Log" Background="LightGray"></TextBlock>
         </ScrollViewer>
     </StackPanel>
 </Window>

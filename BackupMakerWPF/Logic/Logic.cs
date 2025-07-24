@@ -26,7 +26,7 @@ public class Logic
         ];
     }
 
-    public void startBackup(string origin, string destiny)
+    public void startBackup(string origin, string destiny, Action<string> onReport = null)
     {
         string destinyDirectory = $"{destiny}:\\Nuevo respaldo";  //Carpeta que guaradara el respaldo
         Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino del respaldo
@@ -39,14 +39,14 @@ public class Logic
             Directory.CreateDirectory(destinyUserFolder);
             foreach(string directory in includedDirectories)
             {
-                CopyFolders($"{user}\\{directory}", destinyUserFolder);
+                CopyFolders($"{user}\\{directory}", destinyUserFolder, onReport);
             }
         }
 
         string oldRoot = $"{origin}:\\windows.old";
     }
 
-    private void CopyFiles(string oDirectory, string dDirectory)
+    private void CopyFiles(string oDirectory, string dDirectory, Action<string> onReport = null)
     {
         foreach (string file in Directory.GetFiles(oDirectory))
         {
@@ -55,30 +55,34 @@ public class Logic
             if (!excludedFiles.Contains(extension))
             {
                 Console.WriteLine($"Se esta copiando {file}");
+                onReport?.Invoke($"Se esta copiando {file}");
                 File.Copy(file, $"{dDirectory}\\{fileName}", true);
                 Console.WriteLine($"Se copio: {file}");
+                onReport?.Invoke($"Se copio: {file}");
             }
             else
             {
                 Console.WriteLine($"No se copio: {file}");
+                onReport?.Invoke($"No se copio: {file}");
             }
         }
     }
 
-    private void CopyFolders(string oDirectory, string dDirectory)
+    private void CopyFolders(string oDirectory, string dDirectory, Action<string> onReport = null)
     {
         string folderName = Path.GetFileName(oDirectory);
         try
         {
             Directory.CreateDirectory($"{dDirectory}\\{folderName}");
             Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
-            CopyFiles(oDirectory, $"{dDirectory}\\{folderName}");
+            onReport?.Invoke($"Se encontro la carpeta: {oDirectory}");
+            CopyFiles(oDirectory, $"{dDirectory}\\{folderName}", onReport);
             string[] folders = Directory.GetDirectories(oDirectory);
             if (folders.Length > 0)
             {
                 foreach (string folder in folders)
                 {
-                    CopyFolders(folder, $"{dDirectory}\\{folderName}");
+                    CopyFolders(folder, $"{dDirectory}\\{folderName}", onReport);
                 }
             }
         }
