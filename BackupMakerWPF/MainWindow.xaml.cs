@@ -18,6 +18,9 @@ namespace BackupMakerWPF;
 /// </summary>
 public partial class MainWindow : Window
 {
+    
+    private readonly Logic.Logic logic = new Logic.Logic();
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -70,6 +73,19 @@ public partial class MainWindow : Window
             StartButton.IsEnabled = true;
         }
     }
+
+    private void StartBackup(object sender, EventArgs e)
+    {
+        StartButton.IsEnabled = false;
+        ProgressIndicator.Visibility = Visibility.Visible;
+        var selectedOrigin = $"{Origin.SelectedItem}";
+        var selectedDestiny = $"{Destiny.SelectedItem}";
+        
+        logic.startBackup(selectedOrigin, selectedDestiny);
+        StartButton.IsEnabled = true;
+        ProgressIndicator.Visibility = Visibility.Collapsed;
+    }
+
 }
 
 public class AvailableDrives : ObservableCollection<char>

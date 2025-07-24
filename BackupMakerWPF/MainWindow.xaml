@@ -34,12 +34,17 @@
                 DropDownOpened="HandleChange"
                 DropDownClosed="VerifySelection"/>
         </StackPanel>
-        <TextBlock Visibility="Collapsed" Name="NoSoErr">El disco detino no contiene un sistema operativo Windows</TextBlock>
+        <TextBlock Visibility="Collapsed" Name="NoSoErr">El disco de origen no contiene un sistema operativo Windows</TextBlock>
         <TextBlock Visibility="Collapsed" Name="SameDiskErr">El disco de origen no puede ser el mismo que de destino</TextBlock>
         <Button
             Width="50"
             Margin="20"
             Name="StartButton"
-            IsEnabled="False">Copiar</Button>
+            IsEnabled="False"
+            Click="StartBackup">Copiar</Button>
+        <StackPanel Name="ProgressIndicator" Visibility="Hidden">
+            <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
+            <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
+        </StackPanel>
     </StackPanel>
 </Window>

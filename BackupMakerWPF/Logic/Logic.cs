@@ -1,0 +1,104 @@
+using System.IO;
+namespace BackupMakerWPF.Logic;
+
+public class Logic
+{
+    private List<string> includedDirectories { get; set; } = new List<string>();
+    private List<string> excludedFiles { get; set; } = new List<string>();
+    private List<string> excludedDirectories { get; set; } = new List<string>();
+    private List<string> errorList { get; set; } = new List<string>();
+
+    public Logic()
+    {
+        this.includedDirectories =
+        [
+            // "Documents",
+            "Desktop",
+            "Downloads",
+            "Music",
+            "Videos",
+            "Pictures"
+        ];
+        this.excludedFiles = [
+            ".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll", ".win", ".iso",
+            ".img", ".asp", ".msp", ".cfg", ".cat", ".bin", ".mkv", ".efi", ".p7b", ".inf", ".msi", ".bmp", ".mui",
+            ".dat", ".man", "m4a"
+        ];
+    }
+
+    public void startBackup(string origin, string destiny)
+    {
+        string destinyDirectory = $"{destiny}:\\Nuevo respaldo";  //Carpeta que guaradara el respaldo
+        Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino del respaldo
+
+        List<string> users = GetUsersFolders($"{origin}:");
+        foreach(string user in users)
+        {
+            string userFolderName = Path.GetFileName(user);
+            string destinyUserFolder = $"{destiny}:\\Nuevo respaldo\\{userFolderName}";
+            Directory.CreateDirectory(destinyUserFolder);
+            foreach(string directory in includedDirectories)
+            {
+                CopyFolders($"{user}\\{directory}", destinyUserFolder);
+            }
+        }
+
+        string oldRoot = $"{origin}:\\windows.old";
+    }
+
+    private void CopyFiles(string oDirectory, string dDirectory)
+    {
+        foreach (string file in Directory.GetFiles(oDirectory))
+        {
+            string fileName = Path.GetFileName(file);
+            string extension = Path.GetExtension(file);
+            if (!excludedFiles.Contains(extension))
+            {
+                Console.WriteLine($"Se esta copiando {file}");
+                File.Copy(file, $"{dDirectory}\\{fileName}", true);
+                Console.WriteLine($"Se copio: {file}");
+            }
+            else
+            {
+                Console.WriteLine($"No se copio: {file}");
+            }
+        }
+    }
+
+    private void CopyFolders(string oDirectory, string dDirectory)
+    {
+        string folderName = Path.GetFileName(oDirectory);
+        try
+        {
+            Directory.CreateDirectory($"{dDirectory}\\{folderName}");
+            Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
+            CopyFiles(oDirectory, $"{dDirectory}\\{folderName}");
+            string[] folders = Directory.GetDirectories(oDirectory);
+            if (folders.Length > 0)
+            {
+                foreach (string folder in folders)
+                {
+                    CopyFolders(folder, $"{dDirectory}\\{folderName}");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error al copiar un archivo");
+            errorList.Add(ex.Message);
+        }
+    }
+
+    private List<string> GetUsersFolders(string oDirectory)
+    {
+        this.excludedDirectories =
+        [
+            $"{oDirectory}:\\Users\\All Users",
+            $"{oDirectory}:\\Users\\Default",
+            $"{oDirectory}:\\Users\\Default User"
+        ];
+        List<string> users = new List<string>(Directory.GetDirectories($"{oDirectory}\\Users"));   //Obtenemos las capetas de usuario
+        users = users.Where(i => !excludedDirectories.Contains(i)).ToList();
+        return users;
+    }
+}
