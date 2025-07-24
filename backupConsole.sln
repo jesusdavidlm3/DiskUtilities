@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backupConsole", "backupConsole.csproj", "{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backupConsole", "BackupmakerConsole\backupConsole.csproj", "{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackupMakerWPF", "BackupMakerWPF\BackupMakerWPF.csproj", "{F9013FBB-D3CD-4C12-A12E-B0FDF963D558}"
 EndProject

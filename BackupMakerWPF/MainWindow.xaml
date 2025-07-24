@@ -46,5 +46,8 @@
             <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
             <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
         </StackPanel>
+        <ScrollViewer Height="150" Width="500">
+            <TextBlock Name="log"></TextBlock>
+        </ScrollViewer>
     </StackPanel>
 </Window>
