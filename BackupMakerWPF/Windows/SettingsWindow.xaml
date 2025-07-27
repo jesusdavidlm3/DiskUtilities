@@ -8,25 +8,147 @@
         Title="SettingsWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     
     <Window.Resources>
-        <local:ExcludedExtensions x:Key="ExcludedExtensions"/>
+        <local:VideoExtensions x:Key="VideoExtensions"/>
+        <local:AudioExtensions x:Key="AudioExtensions"/>
+        <local:DocExtensions x:Key="DocExtensions"/>
+        <local:CompressedExtensions x:Key="CompressedExtensions"/>
+        <local:ImageExtensions x:Key="ImageExtensions"/>
+        <local:ProjectExtensions x:Key="ProjectExtensions"/>
+        <local:SystemExtensions x:Key="SystemExtensions"/>
     </Window.Resources>
     
     <StackPanel>
         <TextBlock
             HorizontalAlignment="Center"
-            Text="Ajustes"
+            Text="Archivos excluidos"
             FontSize="20"/>
         <Border
             Width="800"
             BorderThickness="1"
             BorderBrush="Black"/>
         <TextBlock
-            Text="Archivos Excluidos"
+            Text="Video:"
             FontSize="12"/>
-        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ExcludedExtensions}">
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource VideoExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Content="{Binding extension}" IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Audio:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource AudioExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Imagenes:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ImageExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Documentos:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource DocExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Comprimidos:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource CompressedExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Sistema:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource SystemExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock
+            Text="Proyectos:"
+            FontSize="12"/>
+        <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ProjectExtensions}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="750" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox
+                        Margin="0 0 15 0"
+                        Content="{Binding extension}"
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

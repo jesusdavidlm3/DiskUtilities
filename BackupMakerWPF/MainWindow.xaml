@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BackupMakerWPF"
         mc:Ignorable="d"
-        Title="Backup Maker" Height="500" Width="800"
+        Title="Backup Maker" Height="550" Width="800"
         ResizeMode="CanMinimize">
     
     <Window.Resources>
@@ -16,7 +16,7 @@
         <ToolBar DockPanel.Dock="Top">
             <Button
                 Click="OpenSettingsWindows"
-                Content="Opciones"/>
+                Content="Archivos Excluidos"/>
         </ToolBar>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock FontSize="50" HorizontalAlignment="Center">BackupMaker</TextBlock>
