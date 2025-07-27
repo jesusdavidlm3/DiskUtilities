@@ -19,6 +19,7 @@ public class Logic
             "Videos",
             "Pictures"
         ];
+        
         this.excludedFiles = [
             ".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll", ".win", ".iso",
             ".img", ".asp", ".msp", ".cfg", ".cat", ".bin", ".mkv", ".efi", ".p7b", ".inf", ".msi", ".bmp", ".mui",

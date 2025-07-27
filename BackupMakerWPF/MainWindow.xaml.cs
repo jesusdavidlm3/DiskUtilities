@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BackupMakerWPF.Windows;
 
 namespace BackupMakerWPF;
 
@@ -25,7 +26,12 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    
+
+    private void OpenSettingsWindows(object sender, EventArgs e)
+    {
+        var window = new SettingsWindow();
+        window.Show();
+    }
     private void HandleChange(object sender, EventArgs e)
     {
         var drives = (AvailableDrives)Resources["DrivesList"];

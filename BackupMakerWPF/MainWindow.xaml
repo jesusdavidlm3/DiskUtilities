@@ -12,64 +12,71 @@
         <local:AvailableDrives x:Key="DrivesList"/>        
     </Window.Resources>
     
-    <StackPanel HorizontalAlignment="Center">
-        <TextBlock FontSize="50" HorizontalAlignment="Center">BackupMaker</TextBlock>
-        <TextBlock FontSize="30" HorizontalAlignment="Center">By: Jesus Lozano</TextBlock>
-        <StackPanel
-            Margin="0 20 0 0"
-            Orientation="Horizontal"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-            <Label>Disco de Origen: </Label>
-            <ComboBox
-                Margin="0 0 15 0"
-                Name="Origin"
-                ItemsSource="{StaticResource DrivesList}"
-                DropDownOpened="HandleChange"
-                DropDownClosed="VerifySelection"/>
-            <Label>Disco de Destino: </Label>
-            <ComboBox 
-                Margin="0 0 15 0"
-                Name="Destiny"
-                ItemsSource="{StaticResource DrivesList}"
-                DropDownOpened="HandleChange"
-                DropDownClosed="VerifySelection"/>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button
+                Click="OpenSettingsWindows"
+                Content="Opciones"/>
+        </ToolBar>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock FontSize="50" HorizontalAlignment="Center">BackupMaker</TextBlock>
+            <TextBlock FontSize="30" HorizontalAlignment="Center">By: Jesus Lozano</TextBlock>
+            <StackPanel
+                Margin="0 20 0 0"
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+                <Label>Disco de Origen: </Label>
+                <ComboBox
+                    Margin="0 0 15 0"
+                    Name="Origin"
+                    ItemsSource="{StaticResource DrivesList}"
+                    DropDownOpened="HandleChange"
+                    DropDownClosed="VerifySelection"/>
+                <Label>Disco de Destino: </Label>
+                <ComboBox 
+                    Margin="0 0 15 0"
+                    Name="Destiny"
+                    ItemsSource="{StaticResource DrivesList}"
+                    DropDownOpened="HandleChange"
+                    DropDownClosed="VerifySelection"/>
+            </StackPanel>
+            <TextBlock
+                FontSize="15"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed"
+                Foreground="Red"
+                Name="NoSoErr"
+                Text="El disco de origen no contiene un sistema operativo Windows"/>
+            <TextBlock
+                FontSize="15"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed"
+                Foreground="Red"
+                Name="SameDiskErr"
+                Text="El disco de origen no puede ser el mismo que de destino"/>
+            <Button
+                Width="50"
+                Margin="20"
+                Name="StartButton"
+                IsEnabled="False"
+                Click="StartBackup"
+                >Copiar</Button>
+            <TextBlock
+                FontSize="15"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed"
+                Foreground="Green"
+                Name="Success"
+                Margin="0 0 0 10"
+                Text="Copia de seguridad completada"/>
+            <StackPanel Name="ProgressIndicator" Visibility="Collapsed" Margin="0 0 0 10">
+                <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
+                <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
+            </StackPanel>
+            <ScrollViewer Height="200" Width="500" Name="LogScroller">
+                <TextBlock Name="Log" Background="LightGray"></TextBlock>
+            </ScrollViewer>
         </StackPanel>
-        <TextBlock
-            FontSize="15"
-            HorizontalAlignment="Center"
-            Visibility="Collapsed"
-            Foreground="Red"
-            Name="NoSoErr"
-            Text="El disco de origen no contiene un sistema operativo Windows"/>
-        <TextBlock
-            FontSize="15"
-            HorizontalAlignment="Center"
-            Visibility="Collapsed"
-            Foreground="Red"
-            Name="SameDiskErr"
-            Text="El disco de origen no puede ser el mismo que de destino"/>
-        <Button
-            Width="50"
-            Margin="20"
-            Name="StartButton"
-            IsEnabled="False"
-            Click="StartBackup"
-            >Copiar</Button>
-        <TextBlock
-            FontSize="15"
-            HorizontalAlignment="Center"
-            Visibility="Collapsed"
-            Foreground="Green"
-            Name="Success"
-            Margin="0 0 0 10"
-            Text="Copia de seguridad completada"/>
-        <StackPanel Name="ProgressIndicator" Visibility="Collapsed" Margin="0 0 0 10">
-            <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
-            <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
-        </StackPanel>
-        <ScrollViewer Height="200" Width="500" Name="LogScroller">
-            <TextBlock Name="Log" Background="LightGray"></TextBlock>
-        </ScrollViewer>
-    </StackPanel>
+    </DockPanel>
 </Window>
