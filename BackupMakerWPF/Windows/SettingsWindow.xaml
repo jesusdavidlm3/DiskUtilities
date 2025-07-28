@@ -26,9 +26,10 @@
             Width="800"
             BorderThickness="1"
             BorderBrush="Black"/>
-        <TextBlock
-            Text="Video:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Video:"
+            FontSize="12"
+            />
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource VideoExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
