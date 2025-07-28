@@ -29,6 +29,9 @@
         <CheckBox
             Content="Video:"
             FontSize="12"
+            IsChecked="{Binding AllChecked, Source={StaticResource VideoExtensions}, Mode=TwoWay}"
+            Checked="AllVideoCheck"
+            Unchecked="AllVideoCheck"
             />
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource VideoExtensions}">
             <ListBox.ItemsPanel>
@@ -41,13 +44,17 @@
                     <CheckBox
                         Margin="0 0 15 0"
                         Content="{Binding extension}"
-                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"/>
+                        IsChecked="{Binding Path=excluded, Mode=TwoWay}"
+                        />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Audio:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Audio:"
+            FontSize="12"
+            IsChecked="{Binding AllChecked, Source={StaticResource AudioExtensions}, Mode=TwoWay}"
+            Checked="AllAudioCheck"
+            Unchecked="AllAudioCheck"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource AudioExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -63,9 +70,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Imagenes:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Imagenes:"
+            FontSize="12"
+            Checked="AllImagesCheck"
+            Unchecked="AllImagesCheck"
+            IsChecked="{Binding AllChecked, Source={StaticResource ImageExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ImageExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -81,9 +91,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Documentos:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Documentos:"
+            FontSize="12"
+            Checked="AllDocsCheck"
+            Unchecked="AllDocsCheck"
+            IsChecked="{Binding AllChecked, Source={StaticResource DocExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource DocExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -99,9 +112,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Comprimidos:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Comprimidos:"
+            FontSize="12"
+            Checked="AllCompressedCheck"
+            Unchecked="AllCompressedCheck"
+            IsChecked="{Binding AllChecked, Source={StaticResource CompressedExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource CompressedExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -117,9 +133,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Sistema:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Sistema:"
+            FontSize="12"
+            Checked="AllSystemCheck"
+            Unchecked="AllSystemCheck"
+            IsChecked="{Binding AllChecked, Source={StaticResource SystemExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource SystemExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -135,9 +154,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock
-            Text="Proyectos:"
-            FontSize="12"/>
+        <CheckBox
+            Content="Proyectos:"
+            FontSize="12"
+            Checked="AllProjectsCheck"
+            Unchecked="AllProjectsCheck"
+            IsChecked="{Binding AllChecked, Source={StaticResource ProjectExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ProjectExtensions}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
