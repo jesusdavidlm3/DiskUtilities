@@ -82,27 +82,29 @@ public partial class SettingsWindow : Window
     }
 }
 
-public class Extension
+public class Extension : INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
     public string extension { get; set; }
-    public bool excluded { get; set; }
-    // private bool _excluded;
-    // public bool excluded
-    // {
-    //     get => excluded;
-    //     set
-    //     {
-    //         if (_excluded != value)
-    //         {
-    //             _excluded = value;
-    //             onPropertyChanged(nameof(excluded));
-    //         }
-    //     }
-    // }
-    //
-    // public event PropertyChangedEventHandler PropertyChanged;
-    // protected void onPropertyChanged(string propertyName) => 
-    //     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    // public bool excluded { get; set; }
+    private bool _excluded;
+    public bool excluded
+    {
+        get => _excluded;
+        set
+        {
+            if (_excluded != value)
+            {
+                _excluded = value;
+                OnPropertyChanged(nameof(excluded));
+            }
+        }
+    }
+    
+    private void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public Extension(string extension, bool excluded)
     {
