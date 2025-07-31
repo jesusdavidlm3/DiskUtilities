@@ -1,4 +1,9 @@
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
+using System.Windows.Documents;
+using BackupMakerWPF.Windows;
+
 namespace BackupMakerWPF.Logic;
 
 public class Logic
@@ -19,16 +24,45 @@ public class Logic
             "Videos",
             "Pictures"
         ];
+
+
+
+    // var videoExtensions = new VideoExtensions();
+    // var audioExtensions = new AudioExtensions();
+    // var imageExtensions = new ImageExtensions();
+    // var docExtensions =  new DocExtensions();
+    // var compressedExtensions = new CompressedExtensions();
+    // var systemExtensions = new SystemExtensions();
+    // var projectExtensions = new ProjectExtensions();
+
         
-        this.excludedFiles = [
-            ".exe", ".mp3", ".mp4", ".ini", ".ink", ".tmp", ".lnk", ".log", ".bak", ".old", ".dll", ".win", ".iso",
-            ".img", ".asp", ".msp", ".cfg", ".cat", ".bin", ".mkv", ".efi", ".p7b", ".inf", ".msi", ".bmp", ".mui",
-            ".dat", ".man", "m4a"
-        ];
     }
 
     public void startBackup(string origin, string destiny, Action<string> onReport = null)
     {
+        var groupCollection = new List<Type>
+        {
+            typeof(VideoExtensions),
+            typeof(AudioExtensions),
+            typeof(ImageExtensions),
+            typeof(DocExtensions),
+            typeof(CompressedExtensions),
+            typeof(SystemExtensions),
+            typeof(ProjectExtensions)
+        };
+        foreach (var group in groupCollection)
+        {
+            var prop = group.GetProperty("extensions", BindingFlags.Public | BindingFlags.Static);
+            var extensions = prop?.GetValue(null) as IEnumerable<Extension>;
+            if (extensions != null)
+                foreach (var item in extensions)
+                {
+                    if (item.excluded == true)
+                    {
+                        excludedFiles.Add(item.extension);
+                    }
+                }
+        }
         string destinyDirectory = $"{destiny}:\\Nuevo respaldo";  //Carpeta que guaradara el respaldo
         Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino del respaldo
 

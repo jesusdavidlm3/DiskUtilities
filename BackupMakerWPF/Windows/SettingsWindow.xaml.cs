@@ -116,7 +116,7 @@ public class Extension : INotifyPropertyChanged
 public class VideoExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>
+    public static List<Extension> extensions { get; set; } = new List<Extension>
     {
         new (".mp4", false),
         new (".mkv", false),
@@ -138,7 +138,7 @@ public class VideoExtensions : ObservableCollection<Extension>
 class AudioExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>{
+    public static List<Extension> extensions { get; set; } = new List<Extension>{
         new (".mp3", false),
         new (".m4a", false),
         new (".wav", false),
@@ -158,7 +158,7 @@ class AudioExtensions : ObservableCollection<Extension>
 public class ImageExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>
+    public static List<Extension> extensions { get; set; } = new List<Extension>
     {
         new(".bmp", false),
         new(".gif", false),
@@ -180,7 +180,7 @@ public class ImageExtensions : ObservableCollection<Extension>
 public class DocExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>()
+    public static List<Extension> extensions { get; set; } = new List<Extension>()
     {
         new(".txt", false),
         new(".pdf", false),
@@ -212,7 +212,7 @@ public class DocExtensions : ObservableCollection<Extension>
 class CompressedExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>
+    public static List<Extension> extensions { get; set; } = new List<Extension>
     {
         new (".iso", false),
         new (".zip", false),
@@ -233,7 +233,7 @@ class CompressedExtensions : ObservableCollection<Extension>
 class SystemExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>
+    public static List<Extension> extensions { get; set; } = new List<Extension>
     {
         new(".exe", false),
         new(".ini", true),
@@ -272,7 +272,7 @@ class SystemExtensions : ObservableCollection<Extension>
 public class ProjectExtensions : ObservableCollection<Extension>
 {
     public static bool AllChecked { get; set; } = false;
-    public static List<Extension> extensions = new List<Extension>
+    public static List<Extension> extensions { get; set; } = new List<Extension>
     {
         new(".psd", false),
         new(".ai", false),
