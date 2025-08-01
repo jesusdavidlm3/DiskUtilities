@@ -95,42 +95,40 @@ public class Logic
 
     private void CopyFiles(string oDirectory, string dDirectory, Action<string> onReport = null)
     {
-        foreach (string file in Directory.GetFiles(oDirectory))
+        var threadsConfig = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
+        Parallel.ForEach(Directory.GetFiles(oDirectory), threadsConfig, file =>
         {
             string fileName = Path.GetFileName(file);
             string extension = Path.GetExtension(file);
             if (!excludedFiles.Contains(extension))
             {
-                // Console.WriteLine($"Se esta copiando {file}");
                 onReport?.Invoke($"Se esta copiando {file}");
                 File.Copy(file, $"{dDirectory}\\{fileName}", true);
-                // Console.WriteLine($"Se copio: {file}");
                 onReport?.Invoke($"Se copio: {file}");
             }
             else
             {
-                // Console.WriteLine($"No se copio: {file}");
                 onReport?.Invoke($"No se copio: {file}");
             }
-        }
+        });
     }
 
     private void CopyFolders(string oDirectory, string dDirectory, Action<string> onReport = null)
     {
+        var threadsConfig = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
         string folderName = Path.GetFileName(oDirectory);
         try
         {
             Directory.CreateDirectory($"{dDirectory}\\{folderName}");
-            // Console.WriteLine($"Se encontro la carpeta: {oDirectory}");
             onReport?.Invoke($"Se encontro la carpeta: {oDirectory}");
             CopyFiles(oDirectory, $"{dDirectory}\\{folderName}", onReport);
             string[] folders = Directory.GetDirectories(oDirectory);
             if (folders.Length > 0)
             {
-                foreach (string folder in folders)
+                Parallel.ForEach(folders, threadsConfig, folder =>
                 {
                     CopyFolders(folder, $"{dDirectory}\\{folderName}", onReport);
-                }
+                });
             }
         }
         catch (Exception ex)
