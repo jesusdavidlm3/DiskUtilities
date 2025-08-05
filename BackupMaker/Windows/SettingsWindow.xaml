@@ -1,20 +1,21 @@
-<Window x:Class="BackupMakerWPF.Windows.SettingsWindow"
+<Window x:Class="BackupMaker.Windows.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:BackupMakerWPF.Windows"
+        xmlns:local="clr-namespace:BackupMaker.Windows"
+        xmlns:commonClasses="clr-namespace:CommonClasses;assembly=CommonClasses"
         mc:Ignorable="d"
         Title="Archivos excluidos" Height="450" Width="800" ResizeMode="CanMinimize">
     
     <Window.Resources>
-        <local:VideoExtensions x:Key="VideoExtensions"/>
-        <local:AudioExtensions x:Key="AudioExtensions"/>
-        <local:DocExtensions x:Key="DocExtensions"/>
-        <local:CompressedExtensions x:Key="CompressedExtensions"/>
-        <local:ImageExtensions x:Key="ImageExtensions"/>
-        <local:ProjectExtensions x:Key="ProjectExtensions"/>
-        <local:SystemExtensions x:Key="SystemExtensions"/>
+        <commonClasses:VideoExtensions x:Key="VideoExtensions"/>
+        <commonClasses:AudioExtensions x:Key="AudioExtensions"/>
+        <commonClasses:DocExtensions x:Key="DocExtensions"/>
+        <commonClasses:CompressedExtensions x:Key="CompressedExtensions"/>
+        <commonClasses:ImageExtensions x:Key="ImageExtensions"/>
+        <commonClasses:ProjectExtensions x:Key="ProjectExtensions"/>
+        <commonClasses:SystemExtensions x:Key="SystemExtensions"/>
     </Window.Resources>
     
     <StackPanel>

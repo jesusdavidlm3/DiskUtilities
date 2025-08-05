@@ -12,6 +12,12 @@
         <SelfContained>true</SelfContained>
         <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
         <PublishInSingleFile>true</PublishInSingleFile>
+        <AssemblyName>BackupMaker</AssemblyName>
+        <RootNamespace>BackupMaker</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CommonClasses\CommonClasses.csproj" />
+    </ItemGroup>
 
 </Project>

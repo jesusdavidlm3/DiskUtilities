@@ -2,9 +2,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Windows.Documents;
-using BackupMakerWPF.Windows;
+using BackupMaker.Windows;
+using CommonClasses;
 
-namespace BackupMakerWPF.Logic;
+namespace BackupMaker.Logic;
 
 public class Logic
 {

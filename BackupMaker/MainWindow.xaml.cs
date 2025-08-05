@@ -10,9 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BackupMakerWPF.Windows;
+using BackupMaker.Windows;
 
-namespace BackupMakerWPF;
+namespace BackupMaker;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

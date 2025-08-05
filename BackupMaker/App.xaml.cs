@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace BackupMakerWPF;
+namespace BackupMaker;
 
 /// <summary>
 /// Interaction logic for App.xaml
