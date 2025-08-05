@@ -120,6 +120,7 @@ public class DocExtensions : ObservableCollection<Extension>
         new(".odtm", false),
         new(".odtmx", false),
         new(".odtxm", false),
+        new(".epub", false)
     };
     public DocExtensions()
     {
