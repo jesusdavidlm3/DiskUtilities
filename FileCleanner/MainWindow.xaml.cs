@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Path = System.IO.Path;
+using CommonClasses;
 
 namespace FileCleanner;
 
@@ -54,8 +55,26 @@ public partial class MainWindow : Window
             }
         }
     }
+    
+    public void StartCleanning(object sender, EventArgs e)
+    {
+        Success.Visibility = Visibility.Collapsed;
+        StartButton.IsEnabled = false;
+        SelectFolderButton.IsEnabled = false;
+        ProgressIndicator.Visibility = Visibility.Visible;
+        
+        CommonLogic.WalkFolder(FolderToScan);
+        
+        Success.Visibility = Visibility.Visible;
+        StartButton.IsEnabled = true;
+        SelectFolderButton.IsEnabled = true;
+        ProgressIndicator.Visibility = Visibility.Collapsed;
+    }
+}
 
-    public void StartCleanning()
+public static class DeletionLogic
+{
+    public static void DeleteFiles(string folder)
     {
         
     }
