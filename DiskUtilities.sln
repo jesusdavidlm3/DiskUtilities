@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backupConsole", "BackupmakerConsole\backupConsole.csproj", "{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackupMaker", "BackupMaker\BackupMaker.csproj", "{8FFD6C3A-7428-4C32-8B6B-DF8219960205}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonClasses", "CommonClasses\CommonClasses.csproj", "{64862133-9269-40A6-A8E6-BEB7F0FBBB3C}"
@@ -20,10 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8894E024-CCD5-AAB5-EDAD-65F4AE697D29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FFD6C3A-7428-4C32-8B6B-DF8219960205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8FFD6C3A-7428-4C32-8B6B-DF8219960205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FFD6C3A-7428-4C32-8B6B-DF8219960205}.Release|Any CPU.ActiveCfg = Release|Any CPU

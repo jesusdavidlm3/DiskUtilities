@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileCleanner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="File Cleaner" Height="550" Width="800">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button
+                Content="Extensions to Delete"/>
+        </ToolBar>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock FontSize="50" HorizontalAlignment="Center">File Cleaner</TextBlock>
+            <TextBlock FontSize="30" HorizontalAlignment="Center">By: Jesus Lozano</TextBlock>
+            <TextBlock
+                Text="Clean this folder may harm your PC"
+                Foreground="Red"
+                FontSize="15"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed"
+                Margin="0 10 0 0"
+                Name="Warning"/>
+            <TextBlock
+                Text="Operation Completed."
+                Foreground="Green"
+                Visibility="Collapsed"
+                FontSize="15"
+                Name="Success"
+                Margin="0 10 0 0"
+                HorizontalAlignment="Center"/>
+            <TextBlock
+                Text="Folder Selected: None"
+                HorizontalAlignment="Center"
+                Margin="0 10 0 0"
+                Name="UiSelectedFolder"/>
+            <Button
+                Name="SelectFolderButton"
+                Content="Select Folder"
+                Margin="0 10 0 0"
+                Width="90"
+                Click="SelectFolder"/>
+            <Button
+                Width="50"
+                Margin="0 10 0 0"
+                Name="StartButton"
+                IsEnabled="false"
+                Content="Start"/>
+            <StackPanel
+                HorizontalAlignment="Center"
+                Name="ProgressIndicator"
+                Visibility="Collapsed"
+                Margin="10">
+                <TextBlock
+                    Text="Searching files to delete, please wait."
+                    HorizontalAlignment="Center"/>
+                <ProgressBar
+                    IsIndeterminate="true"
+                    Height="10"/>
+            </StackPanel>
+            <ScrollViewer
+                Margin="0 10 0 0"
+                Height="200"
+                Width="500"
+                Name="LogScroller">
+                <TextBlock
+                    Name="Log"
+                    Background="LightGray"/>
+            </ScrollViewer>
+        </StackPanel>
+    </DockPanel>
 </Window>
