@@ -30,14 +30,14 @@ public class Logic
     public void startBackup(string origin, string destiny, Action<string> onReport = null)
     {
         CommonLogic.GroupCollections(excludedFiles);
-        string destinyDirectory = $"{destiny}:\\Nuevo respaldo";  //Carpeta que guaradara el respaldo
+        string destinyDirectory = $"{destiny}:\\New Backup";  //Carpeta que guaradara el respaldo
         Directory.CreateDirectory(destinyDirectory);     //Creamos el directorio destino del respaldo
 
         List<string> users = GetUsersFolders($"{origin}:");
         foreach(string user in users)
         {
             string userFolderName = Path.GetFileName(user);
-            string destinyUserFolder = $"{destiny}:\\Nuevo respaldo\\{userFolderName}";
+            string destinyUserFolder = $"{destiny}:\\New Backup\\{userFolderName}";
             Directory.CreateDirectory(destinyUserFolder);
             foreach(string directory in includedDirectories)
             {
@@ -50,13 +50,13 @@ public class Logic
 
         if (this.errorList.Count > 0)
         {
-            onReport?.Invoke("Se enconraron los siguientes errores:");
+            onReport?.Invoke("Errors found:");
             foreach(string err in this.errorList)
             {
                 onReport?.Invoke(err);
             }
-            onReport?.Invoke("Si desconoce la ubicacion de estas carpetas ignorelas.");
-            onReport?.Invoke("Es posible que sean enlaces simbolicos a otras bibliotecas.");
+            onReport?.Invoke("If you don't know this folders ignore them.");
+            onReport?.Invoke("It may be simbolic links to another libraries.");
         }
     }
 
@@ -69,13 +69,13 @@ public class Logic
             string extension = Path.GetExtension(file);
             if (!excludedFiles.Contains(extension))
             {
-                onReport?.Invoke($"Se esta copiando {file}");
+                onReport?.Invoke($"Copying {file}");
                 File.Copy(file, $"{dDirectory}\\{fileName}", true);
-                onReport?.Invoke($"Se copio: {file}");
+                onReport?.Invoke($"Copied: {file}");
             }
             else
             {
-                onReport?.Invoke($"No se copio: {file}");
+                onReport?.Invoke($"Error copying: {file}");
             }
         });
     }
@@ -87,7 +87,7 @@ public class Logic
         try
         {
             Directory.CreateDirectory($"{dDirectory}\\{folderName}");
-            onReport?.Invoke($"Se encontro la carpeta: {oDirectory}");
+            onReport?.Invoke($"Found folder: {oDirectory}");
             CopyFiles(oDirectory, $"{dDirectory}\\{folderName}", onReport);
             string[] folders = Directory.GetDirectories(oDirectory);
             if (folders.Length > 0)
@@ -122,9 +122,9 @@ public class Logic
     {
         if(Directory.Exists(oldRoot))
         {
-            if (!Directory.Exists($"{destiny}:\\Nuevo respaldo\\Instalaciones Anteriores"))
+            if (!Directory.Exists($"{destiny}:\\New Backup\\Old instalations"))
             {
-                Directory.CreateDirectory($"{destiny}:\\Nuevo respaldo\\Instalaciones Anteriores");
+                Directory.CreateDirectory($"{destiny}:\\New Backup\\Old instalations");
             }
 
             if (Directory.Exists($"{oldRoot}\\windows.old"))
@@ -137,7 +137,7 @@ public class Logic
             foreach (string user in users)
             {
                 string folderName = Path.GetFileName(user);
-                string destinyFolder = $"{destiny}:\\Nuevo respaldo\\Instalaciones Anteriores\\{folderName}";
+                string destinyFolder = $"{destiny}:\\New Backup\\Old instalations\\{folderName}";
                 Directory.CreateDirectory(destinyFolder);
                 foreach (string directory in includedDirectories)
                 {

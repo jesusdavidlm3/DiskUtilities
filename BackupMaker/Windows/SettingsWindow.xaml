@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BackupMaker.Windows"
         xmlns:commonClasses="clr-namespace:CommonClasses;assembly=CommonClasses"
         mc:Ignorable="d"
-        Title="Archivos excluidos" Height="450" Width="800" ResizeMode="CanMinimize">
+        Title="Excluded extensions" Height="450" Width="800" ResizeMode="CanMinimize">
     
     <Window.Resources>
         <commonClasses:VideoExtensions x:Key="VideoExtensions"/>
@@ -21,7 +21,7 @@
     <StackPanel>
         <TextBlock
             HorizontalAlignment="Center"
-            Text="Archivos excluidos"
+            Text="Excluded extensions"
             FontSize="20"/>
         <Border
             Width="800"
@@ -72,7 +72,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <CheckBox
-            Content="Imagenes:"
+            Content="Images:"
             FontSize="12"
             Checked="AllImagesCheck"
             Unchecked="AllImagesCheck"
@@ -93,7 +93,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <CheckBox
-            Content="Documentos:"
+            Content="Documents:"
             FontSize="12"
             Checked="AllDocsCheck"
             Unchecked="AllDocsCheck"
@@ -114,7 +114,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <CheckBox
-            Content="Comprimidos:"
+            Content="Compressed:"
             FontSize="12"
             Checked="AllCompressedCheck"
             Unchecked="AllCompressedCheck"
@@ -135,7 +135,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <CheckBox
-            Content="Sistema:"
+            Content="System:"
             FontSize="12"
             Checked="AllSystemCheck"
             Unchecked="AllSystemCheck"
@@ -156,7 +156,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <CheckBox
-            Content="Proyectos:"
+            Content="Projects:"
             FontSize="12"
             Checked="AllProjectsCheck"
             Unchecked="AllProjectsCheck"

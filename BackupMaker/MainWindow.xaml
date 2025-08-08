@@ -16,7 +16,7 @@
         <ToolBar DockPanel.Dock="Top">
             <Button
                 Click="OpenSettingsWindows"
-                Content="Archivos Excluidos"/>
+                Content="Excluded files"/>
         </ToolBar>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock FontSize="50" HorizontalAlignment="Center">BackupMaker</TextBlock>
@@ -26,14 +26,14 @@
                 Orientation="Horizontal"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
-                <Label>Disco de Origen: </Label>
+                <Label>Origin disk: </Label>
                 <ComboBox
                     Margin="0 0 15 0"
                     Name="Origin"
                     ItemsSource="{StaticResource DrivesList}"
                     DropDownOpened="HandleChange"
                     DropDownClosed="VerifySelection"/>
-                <Label>Disco de Destino: </Label>
+                <Label>Destiny disk: </Label>
                 <ComboBox 
                     Margin="0 0 15 0"
                     Name="Destiny"
@@ -47,21 +47,21 @@
                 Visibility="Collapsed"
                 Foreground="Red"
                 Name="NoSoErr"
-                Text="El disco de origen no contiene un sistema operativo Windows"/>
+                Text="The origin drive doesn't contain a Windows operative System"/>
             <TextBlock
                 FontSize="15"
                 HorizontalAlignment="Center"
                 Visibility="Collapsed"
                 Foreground="Red"
                 Name="SameDiskErr"
-                Text="El disco de origen no puede ser el mismo que de destino"/>
+                Text="The origin and destiny drives can't be the same"/>
             <Button
                 Width="50"
                 Margin="20"
                 Name="StartButton"
                 IsEnabled="False"
                 Click="StartBackup"
-                >Copiar</Button>
+                >Start</Button>
             <TextBlock
                 FontSize="15"
                 HorizontalAlignment="Center"
@@ -69,10 +69,10 @@
                 Foreground="Green"
                 Name="Success"
                 Margin="0 0 0 10"
-                Text="Copia de seguridad completada"/>
+                Text="Backup completed"/>
             <StackPanel Name="ProgressIndicator" Visibility="Collapsed" Margin="0 0 0 10">
                 <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
-                <TextBlock HorizontalAlignment="Center">Copiando, por favor espere.</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Copying, please wait.</TextBlock>
             </StackPanel>
             <ScrollViewer Height="200" Width="500" Name="LogScroller">
                 <TextBlock Name="Log" Background="LightGray"></TextBlock>
