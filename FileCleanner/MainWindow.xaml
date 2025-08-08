@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileCleanner"
         mc:Ignorable="d"
-        Title="File Cleaner" Height="550" Width="800">
+        Title="File Cleaner" Height="550" Width="800" ResizeMode="CanMinimize">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
             <Button
-                Content="Extensions to Delete"/>
+                Content="Extensions to Delete"
+                Click="OpenExtensionsWindows"/>
         </ToolBar>
         <StackPanel HorizontalAlignment="Center">
             <TextBlock FontSize="50" HorizontalAlignment="Center">File Cleaner</TextBlock>

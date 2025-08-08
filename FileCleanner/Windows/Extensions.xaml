@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileCleanner.Windows"
         xmlns:commonClasses="clr-namespace:CommonClasses;assembly=CommonClasses"
         mc:Ignorable="d"
-        Title="Extensions" Height="450" Width="800">
+        Title="Extensions" Height="450" Width="800" ResizeMode="CanMinimize">
     
     <Window.Resources>
         <commonClasses:VideoExtensions x:Key="VideoExtensions"/>
@@ -51,6 +51,8 @@
         <CheckBox
             Content="Audio:"
             FontSize="12"
+            Checked="AllAudioChecked"
+            Unchecked="AllAudioChecked"
             IsChecked="{Binding AllChecked, Source={StaticResource AudioExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource AudioExtensions}">
             <ListBox.ItemsPanel>
@@ -69,6 +71,8 @@
         </ListBox>
         <CheckBox
             Content="Image: "
+            Checked="AllImageChecked"
+            Unchecked="AllImageChecked"
             IsChecked="{Binding AllChecked, Source={StaticResource ImageExtensions}, Mode=TwoWay}"
             FontSize="12"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ImageExtensions}">
@@ -89,6 +93,8 @@
         <CheckBox
             FontSize="12"
             Content="Documents:"
+            Checked="AllDocsChecked"
+            Unchecked="AllDocsChecked"
             IsChecked="{Binding AllChecked, Source={StaticResource DocExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource DocExtensions}">
             <ListBox.ItemsPanel>
@@ -107,6 +113,8 @@
         <CheckBox
             FontSize="12"
             Content="Compressed:"
+            Checked="AllCompressedChecked"
+            Unchecked="AllCompressedChecked"
             IsChecked="{Binding AllChecked, Source={StaticResource CompressedExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource CompressedExtensions}">
             <ListBox.ItemsPanel>
@@ -125,6 +133,8 @@
         <CheckBox
             FontSize="12"
             Content="System:"
+            Checked="AllSystemChecked"
+            Unchecked="AllSystemChecked"
             IsChecked="{Binding AllChecked, Mode=TwoWay, Source={StaticResource SystemExtensions}}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource SystemExtensions}">
             <ListBox.ItemsPanel>
@@ -143,6 +153,8 @@
         <CheckBox
             FontSize="12"
             Content="Project:"
+            Checked="AllProjectsChecked"
+            Unchecked="AllProjectsChecked"
             IsChecked="{Binding AllChecked, Source={StaticResource ProjectExtensions}, Mode=TwoWay}"/>
         <ListBox SelectionMode="Multiple" ItemsSource="{StaticResource ProjectExtensions}">
             <ListBox.ItemsPanel>

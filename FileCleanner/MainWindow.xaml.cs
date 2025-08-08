@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Path = System.IO.Path;
 using CommonClasses;
+using FileCleanner.Windows;
 
 namespace FileCleanner;
 
@@ -55,15 +56,34 @@ public partial class MainWindow : Window
             }
         }
     }
+
+    public void OpenExtensionsWindows(object sender, EventArgs e)
+    {
+        var extensionsWindows = new Extensions();
+        extensionsWindows.Show();
+    }
     
-    public void StartCleanning(object sender, EventArgs e)
+    public async void StartCleanning(object sender, EventArgs e)
     {
         Success.Visibility = Visibility.Collapsed;
         StartButton.IsEnabled = false;
         SelectFolderButton.IsEnabled = false;
         ProgressIndicator.Visibility = Visibility.Visible;
+        Log.Text = "";
         
-        CommonLogic.WalkFolder(FolderToScan);
+        CommonLogic.GroupCollections(Logic.Logic.excludedFiles);
+        await Task.Run(() =>
+        {
+            CommonLogic.WalkFolder(FolderToScan, null, (file) => Logic.Logic.DeleteFile(file, (file) =>
+            {
+                Dispatcher?.Invoke(() =>
+                {   
+                    Log.Text += $"{file}\n";
+                    LogScroller.ScrollToBottom();
+                });
+            }));            
+        });
+
         
         Success.Visibility = Visibility.Visible;
         StartButton.IsEnabled = true;
