@@ -69,19 +69,11 @@ public partial class MainWindow : Window
         StartButton.IsEnabled = false;
         SelectFolderButton.IsEnabled = false;
         ProgressIndicator.Visibility = Visibility.Visible;
-        Log.Text = "";
         
         CommonLogic.GroupCollections(Logic.Logic.excludedFiles);
         await Task.Run(() =>
         {
-            CommonLogic.WalkFolder(FolderToScan, null, (file) => Logic.Logic.DeleteFile(file, (file) =>
-            {
-                Dispatcher?.Invoke(() =>
-                {   
-                    Log.Text += $"{file}\n";
-                    LogScroller.ScrollToBottom();
-                });
-            }));            
+            CommonLogic.WalkFolder(FolderToScan, null, (file) => Logic.Logic.DeleteFile(file));            
         });
 
         

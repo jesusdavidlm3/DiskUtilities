@@ -59,17 +59,9 @@
                     HorizontalAlignment="Center"/>
                 <ProgressBar
                     IsIndeterminate="true"
-                    Height="10"/>
+                    Height="10"
+                    Width="300"/>
             </StackPanel>
-            <ScrollViewer
-                Margin="0 10 0 0"
-                Height="200"
-                Width="500"
-                Name="LogScroller">
-                <TextBlock
-                    Name="Log"
-                    Background="LightGray"/>
-            </ScrollViewer>
         </StackPanel>
     </DockPanel>
 </Window>

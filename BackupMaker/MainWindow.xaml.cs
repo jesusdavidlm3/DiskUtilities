@@ -94,14 +94,7 @@ public partial class MainWindow : Window
         var selectedOrigin = $"{Origin.SelectedItem}";
         var selectedDestiny = $"{Destiny.SelectedItem}";
         
-        await Task.Run((() => logic.startBackup(selectedOrigin, selectedDestiny, (report) =>
-        {
-            Dispatcher.Invoke(() =>
-            {
-                Log.Text += $"{report}\n";
-                LogScroller.ScrollToBottom();
-            });
-        })));
+        await Task.Run((() => logic.startBackup(selectedOrigin, selectedDestiny)));
         
         StartButton.IsEnabled = true;
         ProgressIndicator.Visibility = Visibility.Collapsed;

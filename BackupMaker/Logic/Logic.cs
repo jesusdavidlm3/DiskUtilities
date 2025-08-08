@@ -69,13 +69,13 @@ public class Logic
             string extension = Path.GetExtension(file);
             if (!excludedFiles.Contains(extension))
             {
-                onReport?.Invoke($"Copying {file}");
+                // onReport?.Invoke($"Copying {file}");
                 File.Copy(file, $"{dDirectory}\\{fileName}", true);
                 onReport?.Invoke($"Copied: {file}");
             }
             else
             {
-                onReport?.Invoke($"Error copying: {file}");
+                // onReport?.Invoke($"Error copying: {file}");
             }
         });
     }

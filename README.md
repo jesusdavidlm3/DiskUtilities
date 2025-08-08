@@ -16,5 +16,9 @@ Future updates
 * BackupMaker:
   * Option to name a Backup.
   * Option to overwrite files to keep just one Backup for each PC.
+  * Index the files to copy to give a clue about the operation state.
+  * Option to restore a Backup from a folder.
+* File Cleaner:
+  * Option to delete files or folder with names like given params. 
 * Rest of the apps:
   * In Progress.
