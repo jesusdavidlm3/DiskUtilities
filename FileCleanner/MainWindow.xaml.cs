@@ -21,12 +21,12 @@ namespace FileCleanner;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private string FolderToScan;
+    
     public MainWindow()
     {
         InitializeComponent();
     }
-
-    private string FolderToScan;
     
     public void SelectFolder(object sender, EventArgs e)
     {
