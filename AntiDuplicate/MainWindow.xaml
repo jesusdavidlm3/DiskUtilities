@@ -5,8 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AntiDuplicate"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Anti Duplicate" Height="550" Width="800" ResizeMode="CanMinimize">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button
+                Content="Options"/>
+        </ToolBar>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock
+                Text="Anti Duplicate"
+                FontSize="50"
+                HorizontalAlignment="Center"/>
+            <TextBlock
+                Text="By Jesus Lozano"
+                FontSize="30"
+                HorizontalAlignment="Center"/>
+            <TextBlock
+                Visibility="Collapsed"
+                Name="Warning"
+                Text="Delete this folder's content may harm your PC"
+                Foreground="red"
+                HorizontalAlignment="Center"
+                FontSize="15"/>
+            <Button
+                Content="Select Folder"
+                Width="90"
+                Margin="0 15 0 0"
+                Click="SelectFolder"/>
+            <TextBlock
+                Name="FolderToScan"
+                Text="Selected folder: none"
+                HorizontalAlignment="Center"/>
+            <Button
+                Name="StartButton"
+                IsEnabled="False"
+                Margin="0 20 0 0"
+                Width="50"
+                Content="Start"/>
+            <StackPanel
+                Name="ProgressIndicator"
+                Margin="0 20 0 0"
+                Visibility="Collapsed">
+                <TextBlock
+                    Text="Looking for duplicates, please wait"
+                    HorizontalAlignment="Center"/>
+                <ProgressBar
+                    Height="10"
+                    Width="200"
+                    IsIndeterminate="True"/>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>

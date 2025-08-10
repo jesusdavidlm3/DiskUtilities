@@ -60,7 +60,7 @@ public partial class MainWindow : Window
     public void OpenExtensionsWindows(object sender, EventArgs e)
     {
         var extensionsWindows = new Extensions();
-        extensionsWindows.Show();
+        extensionsWindows.ShowDialog();
     }
     
     public async void StartCleanning(object sender, EventArgs e)

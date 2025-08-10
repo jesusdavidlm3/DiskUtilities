@@ -20,5 +20,13 @@ Future updates
   * Option to restore a Backup from a folder.
 * File Cleaner:
   * Option to delete files or folder with names like given params. 
+* Anti Duplicate:
+  * 1st spring:
+    * Compare folder and file names.
+    * Delete older or newer results.
+  * 2nd spring:
+    * Compare identically content no matter the name.
+    * Search by Similar names.
+    * Select two folders or drives to compare between them.
 * Rest of the apps:
   * In Progress.

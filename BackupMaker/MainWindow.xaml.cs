@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     private void OpenSettingsWindows(object sender, EventArgs e)
     {
         var window = new SettingsWindow();
-        window.Show();
+        window.ShowDialog();
     }
     private void HandleChange(object sender, EventArgs e)
     {
