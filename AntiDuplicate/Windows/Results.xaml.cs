@@ -1,4 +1,6 @@
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Data;
 using AntiDuplicate;
 using AntiDuplicate.Classes;
 
@@ -7,9 +9,9 @@ namespace AntiDuplicate.Windows;
 public partial class Results : Window
 {
     
-    public DuplicatesCollection duplicatesCollection;
+    public ObservableCollection<Coincidence> duplicatesCollection;
     
-    public Results(DuplicatesCollection duplicatesCollection)
+    public Results(ObservableCollection<Coincidence> duplicatesCollection)
     {
         InitializeComponent();
         this.duplicatesCollection = duplicatesCollection;

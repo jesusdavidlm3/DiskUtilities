@@ -6,7 +6,8 @@
         xmlns:Window="clr-namespace:AntiDuplicate"
         xmlns:Classes="clr-namespace:AntiDuplicate.Classes"
         mc:Ignorable="d"
-        Title="Results" MinWidth="800" MinHeight="550">
+        Title="Results" MinWidth="800" MinHeight="550"
+        WindowStyle="None">
     <DockPanel>
         <TextBlock
             DockPanel.Dock="Top"
@@ -19,15 +20,16 @@
             Width="800"
             BorderBrush="Black"/>
         
-        <StackPanel DockPanel.Dock="Bottom" Margin="10">
+        <StackPanel DockPanel.Dock="Bottom" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button
                 HorizontalAlignment="Right"
-                Content="Delete selection"/>
+                Content="Delete selection"
+                Margin="5 0 5 0"/>
         </StackPanel>
         <ScrollViewer>
             <ListBox ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="{x:Type Classes:DuplicatesCollection}">
                         <StackPanel>
                             <TextBlock
                                 Text="{Binding FileName}"
@@ -35,7 +37,16 @@
                             <ItemsControl ItemsSource="{Binding}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox Content="{Binding Info.FullName}" IsChecked="{Binding IsChecked}" />
+                                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock
+                                                    Text="{Binding Info.FullName}"/>
+                                                <TextBlock
+                                                    Text=" - Modified: "/>
+                                                <TextBlock
+                                                    Text="{Binding Info.LastWriteTime}"/>
+                                            </StackPanel>
+                                        </CheckBox>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

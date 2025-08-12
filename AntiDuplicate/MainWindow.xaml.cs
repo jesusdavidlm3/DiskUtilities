@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -121,8 +122,9 @@ public partial class MainWindow : Window
         ProgressIndicator.Visibility = Visibility.Collapsed;
         StartButton.IsEnabled = true;
         SelectFolderButton.IsEnabled = true;
-        
-        var resultsWindow = new Results(duplicatesCollection);
+
+        var observableDuplicatesCollection = new ObservableCollection<Coincidence>(duplicatesCollection);
+        var resultsWindow = new Results(observableDuplicatesCollection);
         resultsWindow.ShowDialog();
     }
 }

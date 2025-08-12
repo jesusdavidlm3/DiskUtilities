@@ -45,7 +45,7 @@ public class Coincidence : List<FileEntry>
     }
 }
 
-public class DuplicatesCollection : ObservableCollection<Coincidence>
+public class DuplicatesCollection : List<Coincidence>
 {
     public DuplicatesCollection(){ }
 }
