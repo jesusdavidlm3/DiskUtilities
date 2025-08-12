@@ -26,7 +26,7 @@ public partial class MainWindow : Window
 {
     private string FolderToScan;
     private List<FileInfo> IndexedFiles = new List<FileInfo>();
-    private DuplicatesFound duplicatesFound { get; set; } = new DuplicatesFound();
+    private DuplicatesCollection duplicatesCollection = new();
     private HashSet<int> matchedEntries = new HashSet<int>();
     
     public MainWindow()
@@ -69,7 +69,8 @@ public partial class MainWindow : Window
         StartButton.IsEnabled = false;
         SelectFolderButton.IsEnabled = false;
         IndexedFiles.Clear();
-        duplicatesFound.Clear();
+        duplicatesCollection.Clear();
+        matchedEntries.Clear();
         ProcessPhase.Text = "Indexing files, Please wait...";
 
         await Task.Run(() =>
@@ -88,34 +89,30 @@ public partial class MainWindow : Window
             Dispatcher.Invoke(() => ProcessPhase.Text = "Comparing files, Please wait...");
             for (int i = 0; i < IndexedFiles.Count; i++)
             {
-                if (!matchedEntries.Contains(i))
+                if (matchedEntries.Contains(i)) continue;
+                for (int j = IndexedFiles.Count; j-1 > i; j--)
                 {
-                    for (int j = IndexedFiles.Count; j-1 > i; j--)
+                    if (matchedEntries.Contains(j-1)) continue;
+                    if (IndexedFiles[i].Name != IndexedFiles[j - 1].Name) continue;
+                    Console.WriteLine($"{IndexedFiles[i].FullName} igual a {IndexedFiles[j-1].FullName}");
+                    var duplicate = duplicatesCollection.FirstOrDefault(c => c.FileName == IndexedFiles[j-1].Name);
+                    if(duplicate != null)
                     {
-                        if (matchedEntries.Contains(j)) continue;
-                        if (IndexedFiles[i].Name == IndexedFiles[j-1].Name)
-                        {
-                            Console.WriteLine($"{IndexedFiles[i].FullName} igual a {IndexedFiles[j-1].FullName}");
-                            var duplicate = duplicatesFound.FirstOrDefault(c => c.FileName == IndexedFiles[j-1].Name);
-                            if(duplicate != null)
-                            {
-                                var file = new FileEntry(IndexedFiles[i]);
-                                duplicate.Add(file);
-                            }
-                            else
-                            {
-                                var newDuplicate = new Coincidence(IndexedFiles[i].Name);
-                                var file1 = new FileEntry(IndexedFiles[i]);
-                                var file2 = new FileEntry(IndexedFiles[j-1]);
-                                newDuplicate.Add(file1);
-                                newDuplicate.Add(file2);
-                                duplicatesFound.Add(newDuplicate);
-                                matchedEntries.Add(j);
-                            }
+                        var file = new FileEntry(IndexedFiles[j-1]);
+                        duplicate.Add(file);
+                    }
+                    else
+                    {
+                        var newDuplicate = new Coincidence(IndexedFiles[i].Name);
+                        var file1 = new FileEntry(IndexedFiles[i]);
+                        var file2 = new FileEntry(IndexedFiles[j-1]);
+                        newDuplicate.Add(file1);
+                        newDuplicate.Add(file2);
+                        duplicatesCollection.Add(newDuplicate);
+                        matchedEntries.Add(j-1);
+                    }
 
-                            matchedEntries.Add(i);
-                        }
-                    }   
+                    matchedEntries.Add(i);
                 }
             }
         });
@@ -124,8 +121,8 @@ public partial class MainWindow : Window
         ProgressIndicator.Visibility = Visibility.Collapsed;
         StartButton.IsEnabled = true;
         SelectFolderButton.IsEnabled = true;
-
-        var resultsWindow = new Results(duplicatesFound);
+        
+        var resultsWindow = new Results(duplicatesCollection);
         resultsWindow.ShowDialog();
     }
 }

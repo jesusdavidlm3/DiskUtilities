@@ -6,9 +6,13 @@ namespace AntiDuplicate.Windows;
 
 public partial class Results : Window
 {
-    public Results(DuplicatesFound duplicatesFound)
+    
+    public DuplicatesCollection duplicatesCollection;
+    
+    public Results(DuplicatesCollection duplicatesCollection)
     {
         InitializeComponent();
-        DataContext = duplicatesFound;
+        this.duplicatesCollection = duplicatesCollection;
+        DataContext = this.duplicatesCollection;
     }
 }

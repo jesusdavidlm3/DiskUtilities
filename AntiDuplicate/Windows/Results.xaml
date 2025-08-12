@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:Window="clr-namespace:AntiDuplicate"
+        xmlns:Classes="clr-namespace:AntiDuplicate.Classes"
         mc:Ignorable="d"
         Title="Results" MinWidth="800" MinHeight="550">
     <DockPanel>
@@ -24,8 +25,23 @@
                 Content="Delete selection"/>
         </StackPanel>
         <ScrollViewer>
-            <ListBox>
-                
+            <ListBox ItemsSource="{Binding}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock
+                                Text="{Binding FileName}"
+                                FontSize="20"/>
+                            <ItemsControl ItemsSource="{Binding}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding Info.FullName}" IsChecked="{Binding IsChecked}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
     </DockPanel>

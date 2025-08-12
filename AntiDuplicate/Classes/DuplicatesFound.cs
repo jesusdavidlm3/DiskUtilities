@@ -1,12 +1,32 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 
 namespace AntiDuplicate.Classes;
 
-public class FileEntry
+public class FileEntry : INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
     public FileInfo Info { get; set; }
-    public bool IsChecked { get; set; }
+    private bool _IsChecked;
+
+    public bool IsChecked
+    {
+        get => _IsChecked;
+        set
+        {
+            if (_IsChecked != value)
+            {
+                _IsChecked = value;
+                OnPropertyChanged(nameof(_IsChecked));
+            }
+        }
+    }
+
+    private void OnPropertyChanged(string  propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public FileEntry(FileInfo info, bool? isChecked = false)
     {
@@ -25,7 +45,7 @@ public class Coincidence : List<FileEntry>
     }
 }
 
-public class DuplicatesFound : ObservableCollection<Coincidence>
+public class DuplicatesCollection : ObservableCollection<Coincidence>
 {
-    public DuplicatesFound() { }
+    public DuplicatesCollection(){ }
 }
