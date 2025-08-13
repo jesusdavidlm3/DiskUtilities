@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:AntiDuplicate"
         mc:Ignorable="d"
         Title="Anti Duplicate" Height="550" Width="800" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <local:DeleteModeOptions x:Key="DeleteModeOptions"/>
+    </Window.Resources>
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top">
-            <Button
-                Content="Options"/>
-        </ToolBar>
-        <StackPanel HorizontalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" Margin="0 20 0 0">
             <TextBlock
                 Text="Anti Duplicate"
                 FontSize="50"
@@ -37,6 +36,15 @@
                 Name="UiSelectedFolder"
                 Text="Selected folder: none"
                 HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                <Label Content="Delete mode: "/>
+                <ComboBox
+                    Name="DeleteMode"
+                    Width="100"
+                    ItemsSource="{StaticResource DeleteModeOptions}"
+                    DisplayMemberPath="Name"
+                    />
+            </StackPanel>
             <Button
                 Name="StartButton"
                 IsEnabled="False"
@@ -54,7 +62,13 @@
                 <ProgressBar
                     Height="10"
                     Width="200"
-                    IsIndeterminate="True"/>
+                    IsIndeterminate="True"
+                    Maximum="100"
+                    Value="0"
+                    Name="ProgressBar"/>
+                <TextBlock Name="From" Text="0"/>
+                <TextBlock Text=" - "/>
+                <TextBlock Name="To" Text="0"/>
             </StackPanel>
         </StackPanel>
     </DockPanel>

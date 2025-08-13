@@ -22,11 +22,11 @@ Future updates
   * Option to delete files or folder with names like given params. 
 * Anti Duplicate:
   * 1st spring:
-    * Compare folder and file names.
-    * Delete older or newer results.
+    * Compare and file names.
+    * Delete older results.
+    * Limit duplicates found to 100 results if it's going to check it manually. 
   * 2nd spring:
-    * Compare identically content no matter the name.
-    * Search by Similar names.
+    * Compare identically content no matter the name by hashes.
     * Select two folders or drives to compare between them.
 * Rest of the apps:
   * In Progress.

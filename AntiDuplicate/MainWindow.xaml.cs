@@ -69,33 +69,51 @@ public partial class MainWindow : Window
         ProgressIndicator.Visibility = Visibility.Visible;
         StartButton.IsEnabled = false;
         SelectFolderButton.IsEnabled = false;
-        IndexedFiles.Clear();
+        DeleteMode.IsEnabled = false;
         duplicatesCollection.Clear();
-        matchedEntries.Clear();
         ProcessPhase.Text = "Indexing files, Please wait...";
+        
+        var operation = DeleteMode.SelectedItem as SelectionOption;
 
+        // Index the files
         await Task.Run(() =>
         {
             CommonLogic.WalkFolder(FolderToScan, null, file =>
             {
                 var info = new FileInfo(file);
                 IndexedFiles.Add(info);
-                Console.WriteLine(info.Name);
             });
         });
 
         
         await Task.Run(() =>
         {
-            Dispatcher.Invoke(() => ProcessPhase.Text = "Comparing files, Please wait...");
-            for (int i = 0; i < IndexedFiles.Count; i++)
+            Dispatcher.Invoke(() =>
             {
+                ProcessPhase.Text = "Comparing files, Please wait...";
+                ProgressBar.IsIndeterminate = false;
+                ProgressBar.Maximum = IndexedFiles.Count;
+                ProgressBar.Value = 0;
+                To.Text = (IndexedFiles.Count).ToString();
+            });
+
+            bool iLimit = true; //true to run de "for" at least ane time
+            
+            for (int i = 0; iLimit; i++)
+            {
+                if (operation != null && operation.Id == 0)     //evaluate the "for" condition here
+                {
+                    iLimit = i < IndexedFiles.Count;            //If user select erase walk all.
+                }else if (operation == null || operation.Id == 1)
+                {
+                    iLimit = matchedEntries.Count < 100;        //If user will review limit to 100 files
+                }
+                
                 if (matchedEntries.Contains(i)) continue;
                 for (int j = IndexedFiles.Count; j-1 > i; j--)
                 {
                     if (matchedEntries.Contains(j-1)) continue;
                     if (IndexedFiles[i].Name != IndexedFiles[j - 1].Name) continue;
-                    Console.WriteLine($"{IndexedFiles[i].FullName} igual a {IndexedFiles[j-1].FullName}");
                     var duplicate = duplicatesCollection.FirstOrDefault(c => c.FileName == IndexedFiles[j-1].Name);
                     if(duplicate != null)
                     {
@@ -112,19 +130,36 @@ public partial class MainWindow : Window
                         duplicatesCollection.Add(newDuplicate);
                         matchedEntries.Add(j-1);
                     }
-
                     matchedEntries.Add(i);
                 }
+                Dispatcher.Invoke(() =>
+                {
+                    From.Text = (i).ToString();
+                    ProgressBar.Value = i;
+                });
             }
+            IndexedFiles.Clear();
+            matchedEntries.Clear();
         });
-        
         
         ProgressIndicator.Visibility = Visibility.Collapsed;
         StartButton.IsEnabled = true;
         SelectFolderButton.IsEnabled = true;
+        DeleteMode.IsEnabled = true;
 
-        var observableDuplicatesCollection = new ObservableCollection<Coincidence>(duplicatesCollection);
-        var resultsWindow = new Results(observableDuplicatesCollection);
-        resultsWindow.ShowDialog();
+        if (operation == null ||  operation.Id == 1)
+        {
+            var resultsWindow = new Results(duplicatesCollection);
+            resultsWindow.ShowDialog();   
+        }
+    }
+}
+
+public class DeleteModeOptions : ObservableCollection<Classes.SelectionOption>
+{
+    public DeleteModeOptions()
+    {
+        Add(new SelectionOption("Keep newer", 0));
+        Add(new SelectionOption("Review files", 1));
     }
 }
