@@ -66,6 +66,7 @@ public partial class MainWindow : Window
 
     private async void StartComparison(object sender, EventArgs e)
     {
+        Success.Visibility = Visibility.Collapsed;
         ProgressIndicator.Visibility = Visibility.Visible;
         StartButton.IsEnabled = false;
         SelectFolderButton.IsEnabled = false;
@@ -106,7 +107,12 @@ public partial class MainWindow : Window
                     iLimit = i < IndexedFiles.Count;            //If user select erase walk all.
                 }else if (operation == null || operation.Id == 1)
                 {
-                    iLimit = matchedEntries.Count < 100;        //If user will review limit to 100 files
+                    if(IndexedFiles.Count >= 100){
+                        iLimit = matchedEntries.Count < 100;        
+                    }else
+                    {
+                        iLimit = i < IndexedFiles.Count;
+                    }
                 }
                 
                 if (matchedEntries.Contains(i)) continue;
@@ -118,16 +124,31 @@ public partial class MainWindow : Window
                     if(duplicate != null)
                     {
                         var file = new FileEntry(IndexedFiles[j-1]);
-                        duplicate.Add(file);
+                        duplicate.Add(file);                            
                     }
                     else
                     {
-                        var newDuplicate = new Coincidence(IndexedFiles[i].Name);
-                        var file1 = new FileEntry(IndexedFiles[i]);
-                        var file2 = new FileEntry(IndexedFiles[j-1]);
-                        newDuplicate.Add(file1);
-                        newDuplicate.Add(file2);
-                        duplicatesCollection.Add(newDuplicate);
+                        if (operation != null && operation.Id == 0)
+                        {
+                            if (IndexedFiles[i].LastWriteTime > IndexedFiles[j - 1].LastWriteTime)
+                            {
+                                File.Delete(IndexedFiles[j - 1].FullName);
+                            }else if (IndexedFiles[i].LastWriteTime < IndexedFiles[j - 1].LastWriteTime)
+                            {
+                                File.Delete(IndexedFiles[i].FullName);
+                            }else if (IndexedFiles[i].LastWriteTime == IndexedFiles[j - 1].LastWriteTime)
+                            {
+                                File.Delete(IndexedFiles[j - 1].FullName);
+                            }
+                        }else if (operation == null || operation.Id == 1)
+                        {
+                            var newDuplicate = new Coincidence(IndexedFiles[i].Name);
+                            var file1 = new FileEntry(IndexedFiles[i]);
+                            var file2 = new FileEntry(IndexedFiles[j-1]);
+                            newDuplicate.Add(file1);
+                            newDuplicate.Add(file2);
+                            duplicatesCollection.Add(newDuplicate);   
+                        }
                         matchedEntries.Add(j-1);
                     }
                     matchedEntries.Add(i);
@@ -146,6 +167,7 @@ public partial class MainWindow : Window
         StartButton.IsEnabled = true;
         SelectFolderButton.IsEnabled = true;
         DeleteMode.IsEnabled = true;
+        Success.Visibility = Visibility.Visible;
 
         if (operation == null ||  operation.Id == 1)
         {

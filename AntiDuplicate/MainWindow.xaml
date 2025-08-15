@@ -43,8 +43,17 @@
                     Width="100"
                     ItemsSource="{StaticResource DeleteModeOptions}"
                     DisplayMemberPath="Name"
+                    SelectedIndex="1"
                     />
             </StackPanel>
+            <TextBlock
+                Name="Success"
+                Text="Operation Completed"
+                HorizontalAlignment="Center"
+                Foreground="Green"
+                FontSize="12"
+                Margin="0 10 0 0"
+                Visibility="Collapsed"/>
             <Button
                 Name="StartButton"
                 IsEnabled="False"
